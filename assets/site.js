@@ -33,3 +33,21 @@ When ready to publish, provide the complete self-contained code in one copyable 
 
 Remember: I am the teacher and problem-solver. You are my technical partner. Let's build something useful!`;
 window.addEventListener('DOMContentLoaded',()=>{const pre=document.getElementById('starter-prompt');if(pre)pre.textContent=promptText;const copy=document.getElementById('copy-prompt');if(copy)copy.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(promptText);copy.textContent='✓ Copied!';setTimeout(()=>copy.textContent='Copy starter prompt',2200)}catch{const el=document.getElementById('starter-prompt');const selection=window.getSelection();const range=document.createRange();range.selectNodeContents(el);selection.removeAllRanges();selection.addRange(range);copy.textContent='Select text and copy';}})});
+/* Accessible click-to-enlarge image viewer: close button, backdrop, Escape. */
+window.addEventListener('DOMContentLoaded',()=>{
+  const pictures=[...document.querySelectorAll('main img')];
+  if(!pictures.length)return;
+  const layer=document.createElement('div');layer.className='image-lightbox';layer.hidden=true;layer.setAttribute('role','dialog');layer.setAttribute('aria-modal','true');layer.setAttribute('aria-label','Expanded image');
+  const full=document.createElement('img');full.alt='';
+  const close=document.createElement('button');close.type='button';close.className='lightbox-close';close.setAttribute('aria-label','Close expanded image');close.textContent='×';
+  layer.append(full,close);document.body.append(layer);
+  let opener=null;
+  function dismiss(){layer.hidden=true;full.removeAttribute('src');document.body.style.overflow='';opener?.focus();}
+  for(const pic of pictures){pic.dataset.expandable='true';pic.setAttribute('role','button');pic.tabIndex=0;pic.setAttribute('aria-label',(pic.alt||'Image')+'. Click to enlarge');
+    const open=()=>{opener=pic;full.src=pic.currentSrc||pic.src;full.alt=pic.alt||'Expanded image';layer.hidden=false;document.body.style.overflow='hidden';close.focus();};
+    pic.addEventListener('click',open);pic.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
+  }
+  close.addEventListener('click',dismiss);
+  layer.addEventListener('click',e=>{if(e.target===layer)dismiss();});
+  document.addEventListener('keydown',e=>{if(!layer.hidden&&e.key==='Escape')dismiss();if(!layer.hidden&&e.key==='Tab'){e.preventDefault();close.focus();}});
+});
