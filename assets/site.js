@@ -44,7 +44,7 @@ window.addEventListener('DOMContentLoaded',()=>{
   let opener=null;
   function dismiss(){layer.hidden=true;full.removeAttribute('src');document.body.style.overflow='';opener?.focus();}
   for(const pic of pictures){pic.dataset.expandable='true';pic.setAttribute('role','button');pic.tabIndex=0;pic.setAttribute('aria-label',(pic.alt||'Image')+'. Click to enlarge');
-    const open=()=>{opener=pic;full.src=pic.currentSrc||pic.src;full.alt=pic.alt||'Expanded image';layer.hidden=false;document.body.style.overflow='hidden';close.focus();};
+    const open=()=>{opener=pic;full.src=pic.dataset.fullSrc||pic.currentSrc||pic.src;full.alt=pic.alt||'Expanded image';layer.hidden=false;document.body.style.overflow='hidden';close.focus();};
     pic.addEventListener('click',open);pic.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
   }
   close.addEventListener('click',dismiss);
