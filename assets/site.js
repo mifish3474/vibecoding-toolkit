@@ -53,7 +53,7 @@ window.addEventListener('DOMContentLoaded',()=>{
 });
 
 /* Build / Fix / Extend prompt tabs and copy tools */
-const debugTemplate = \`When I tested the [feature], [describe exactly what happened].
+const debugTemplate = `When I tested the [feature], [describe exactly what happened].
 
 This is not the expected behavior.
 
@@ -65,9 +65,9 @@ Briefly explain what you changed and tell me how to test the fix.
 
 Then provide the complete, updated HTML, CSS, and JavaScript in one self-contained code block that I can copy and paste into my Google Site using Full page embed → Embed code.
 
-Do not provide only the changed portion of the code.\`;
+Do not provide only the changed portion of the code.`;
 
-const debugExample = \`When I tested the Reset button, points were added to the score instead of clearing it.
+const debugExample = `When I tested the Reset button, points were added to the score instead of clearing it.
 
 This is not the expected behavior.
 
@@ -79,9 +79,9 @@ Briefly explain what you changed and tell me how to test the fix.
 
 Then provide the complete, updated HTML, CSS, and JavaScript in one self-contained code block that I can copy and paste into my Google Site using Full page embed → Embed code.
 
-Do not provide only the changed portion of the code.\`;
+Do not provide only the changed portion of the code.`;
 
-const extendTemplate = \`The current functionality is working great! I would like to add the following additional feature:
+const extendTemplate = `The current functionality is working great! I would like to add the following additional feature:
 
 [Clearly describe the new feature and how it should work.]
 
@@ -91,7 +91,7 @@ Briefly explain what you changed, tell me how to test the new feature, and ident
 
 Then provide the complete, updated HTML, CSS, and JavaScript in one self-contained code block that I can copy and paste into my Google Site using Full page embed → Embed code.
 
-Do not provide only the changed portion of the code.\`;
+Do not provide only the changed portion of the code.`;
 
 window.addEventListener('DOMContentLoaded', () => {
   const tabs = [...document.querySelectorAll('.prompt-tabs [role="tab"]')];
