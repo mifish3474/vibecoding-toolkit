@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#6741b8"><meta name="description" content="A beginner-friendly vibe coding toolkit for educators: privacy, prompts, building and publishing custom classroom tools."><title>Prompt Toolkit | Mr. Fish's Vibe Coding Toolkit</title><link rel="stylesheet" href="assets/style.css"><script src="assets/site.js" defer></script></head><body><header><div class="nav"><a class="brand" href="index.html">Mr. Fish's <span>Vibe Coding Toolkit</span></a><nav aria-label="Main navigation"><a href="index.html">Home</a><a href="framework.html">Six Steps</a><a href="prompt.html" aria-current="page">Prompt Toolkit</a><a href="privacy.html">Privacy</a><a href="publish.html">Publish</a><a href="examples.html">Examples</a><a href="about.html">About</a></nav></div></header><main><div class="page-head"><span class="eyebrow">Your AI development partner</span><h1>Build it. Fix it. Make it better.</h1><p>Choose the prompt you need. Each is ready to copy into ChatGPT, Gemini, Claude, or your preferred AI assistant.</p></div><div class="prompt-tabs" role="tablist" aria-label="Choose a vibe coding prompt">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#6741b8"><meta name="description" content="A beginner-friendly vibe coding toolkit for educators: privacy, prompts, building and publishing custom classroom tools."><title>Prompt Toolkit | Mr. Fish's Vibe Coding Toolkit</title><link rel="stylesheet" href="assets/style.css"><script src="assets/site.js?v=20261014-extension-fix" defer></script></head><body><header><div class="nav"><a class="brand" href="index.html">Mr. Fish's <span>Vibe Coding Toolkit</span></a><nav aria-label="Main navigation"><a href="index.html">Home</a><a href="framework.html">Six Steps</a><a href="prompt.html" aria-current="page">Prompt Toolkit</a><a href="privacy.html">Privacy</a><a href="publish.html">Publish</a><a href="examples.html">Examples</a><a href="about.html">About</a></nav></div></header><main><div class="page-head"><span class="eyebrow">Your AI development partner</span><h1>Build it. Fix it. Make it better.</h1><p>Choose the prompt you need. Each is ready to copy into ChatGPT, Gemini, Claude, or your preferred AI assistant.</p></div><div class="prompt-tabs" role="tablist" aria-label="Choose a vibe coding prompt">
 <button type="button" role="tab" id="tab-build" aria-controls="panel-build" aria-selected="true" tabindex="0">Build something</button>
 <button type="button" role="tab" id="tab-fix" aria-controls="panel-fix" aria-selected="false" tabindex="-1">Fix something</button>
 <button type="button" role="tab" id="tab-extend" aria-controls="panel-extend" aria-selected="false" tabindex="-1">Add a feature</button>
@@ -24,6 +24,22 @@
 <div class="prompt-tools"><strong>Feature extension prompt</strong><button type="button" class="btn" id="copy-extend">Copy feature extension prompt</button></div>
 <pre id="extend-prompt" class="prompt" aria-label="Reusable feature extension prompt"></pre><h3>Example: official cornhole scoring</h3><p>Here is how you could request a toggle that adds official cancellation scoring while keeping your existing scoring mode:</p>
 <div class="prompt-tools"><strong>Cornhole scoring extension example</strong><button type="button" class="btn secondary" id="copy-extend-example">Copy example</button></div>
-<pre id="extend-example" class="prompt" aria-label="Feature extension example"></pre>
+<pre id="extend-example" class="prompt" aria-label="Feature extension example">The current functionality is working great! I would like to add the following additional feature:
+
+Please add a toggle that lets me switch between the current additive scoring mode and official cornhole cancellation scoring.
+
+In additive mode, keep the current behavior: points are added directly to each team's total as they score.
+
+In cancellation mode, track each team's points separately for the current round: 1 point for a bag on the board and 3 points for a bag in the hole. Add an End Round button. When I press it, subtract the lower round score from the higher round score and add only the difference to the winning team's overall total. The other team gets zero points for that round. For example, if Blue scores 7 and Red scores 4, Blue earns 3 points for the round. If both teams score the same, neither team earns points. Then clear the round scores so the next round can begin.
+
+Make the scoring mode obvious on screen, and preserve the current Reset and Undo features. If switching modes during a round could cause confusion, ask for confirmation before discarding any unfinished round points.
+
+Make this a targeted edit. Preserve all existing features, functionality, and appearance unless a change is necessary to add the requested feature.
+
+Briefly explain what you changed, tell me how to test the new feature, and identify any existing functionality I should retest to make sure nothing was affected.
+
+Then provide the complete, updated HTML, CSS, and JavaScript in one self-contained code block that I can copy and paste into my Google Site using Full page embed → Embed code.
+
+Do not provide only the changed portion of the code.</pre>
 <p class="notice">After updating your Google Site, test the new feature <em>and</em> the features that already worked.</p>
 </section></main><footer class="footer"><div class="footer-inner"><span>Made for educators by Mr. Fish. Start small. Build something useful.</span><span><a href="mailto:connect@mrfish.app">connect@mrfish.app</a> · <a href="https://classseats.com">ClassSeats</a></span></div></footer></body></html>
