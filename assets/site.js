@@ -93,6 +93,24 @@ Then provide the complete, updated HTML, CSS, and JavaScript in one self-contain
 
 Do not provide only the changed portion of the code.`;
 
+const extendExample = `The current functionality is working great! I would like to add the following additional feature:
+
+Please add a toggle that lets me switch between the current additive scoring mode and official cornhole cancellation scoring.
+
+In additive mode, keep the current behavior: points are added directly to each team's total as they score.
+
+In cancellation mode, track each team's points separately for the current round: 1 point for a bag on the board and 3 points for a bag in the hole. Add an End Round button. When I press it, subtract the lower round score from the higher round score and add only the difference to the winning team's overall total. The other team gets zero points for that round. For example, if Blue scores 7 and Red scores 4, Blue earns 3 points for the round. If both teams score the same, neither team earns points. Then clear the round scores so the next round can begin.
+
+Make the scoring mode obvious on screen, and preserve the current Reset and Undo features. If switching modes during a round could cause confusion, ask for confirmation before discarding any unfinished round points.
+
+Make this a targeted edit. Preserve all existing features, functionality, and appearance unless a change is necessary to add the requested feature.
+
+Briefly explain what you changed, tell me how to test the new feature, and identify any existing functionality I should retest to make sure nothing was affected.
+
+Then provide the complete, updated HTML, CSS, and JavaScript in one self-contained code block that I can copy and paste into my Google Site using Full page embed → Embed code.
+
+Do not provide only the changed portion of the code.`;
+
 window.addEventListener('DOMContentLoaded', () => {
   const tabs = [...document.querySelectorAll('.prompt-tabs [role="tab"]')];
   if (!tabs.length) return;
@@ -121,7 +139,8 @@ window.addEventListener('DOMContentLoaded', () => {
   for (const [displayId, copyId, content, label] of [
     ['debug-prompt', 'copy-debug', debugTemplate, 'Copy debugging prompt'],
     ['debug-example', 'copy-debug-example', debugExample, 'Copy example'],
-    ['extend-prompt', 'copy-extend', extendTemplate, 'Copy feature extension prompt']
+    ['extend-prompt', 'copy-extend', extendTemplate, 'Copy feature extension prompt'],
+    ['extend-example', 'copy-extend-example', extendExample, 'Copy example']
   ]) {
     document.getElementById(displayId).textContent = content;
     const button = document.getElementById(copyId);
