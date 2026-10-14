@@ -51,3 +51,94 @@ window.addEventListener('DOMContentLoaded',()=>{
   layer.addEventListener('click',e=>{if(e.target===layer)dismiss();});
   document.addEventListener('keydown',e=>{if(!layer.hidden&&e.key==='Escape')dismiss();if(!layer.hidden&&e.key==='Tab'){e.preventDefault();close.focus();}});
 });
+
+/* Build / Fix / Extend prompt tabs and copy tools */
+const debugTemplate = \`When I tested the [feature], [describe exactly what happened].
+
+This is not the expected behavior.
+
+Please fix [feature] so that [describe what should happen instead].
+
+Make this a targeted edit. Preserve all existing features, functionality, and appearance unless a change is necessary to correct this problem.
+
+Briefly explain what you changed and tell me how to test the fix.
+
+Then provide the complete, updated HTML, CSS, and JavaScript in one self-contained code block that I can copy and paste into my Google Site using Full page embed → Embed code.
+
+Do not provide only the changed portion of the code.\`;
+
+const debugExample = \`When I tested the Reset button, points were added to the score instead of clearing it.
+
+This is not the expected behavior.
+
+Please fix the Reset button so that both teams' scores return to zero when it is pressed.
+
+Make this a targeted edit. Preserve all existing features, functionality, and appearance unless a change is necessary to correct this problem.
+
+Briefly explain what you changed and tell me how to test the fix.
+
+Then provide the complete, updated HTML, CSS, and JavaScript in one self-contained code block that I can copy and paste into my Google Site using Full page embed → Embed code.
+
+Do not provide only the changed portion of the code.\`;
+
+const extendTemplate = \`The current functionality is working great! I would like to add the following additional feature:
+
+[Clearly describe the new feature and how it should work.]
+
+Make this a targeted edit. Preserve all existing features, functionality, and appearance unless a change is necessary to add the requested feature.
+
+Briefly explain what you changed, tell me how to test the new feature, and identify any existing functionality I should retest to make sure nothing was affected.
+
+Then provide the complete, updated HTML, CSS, and JavaScript in one self-contained code block that I can copy and paste into my Google Site using Full page embed → Embed code.
+
+Do not provide only the changed portion of the code.\`;
+
+window.addEventListener('DOMContentLoaded', () => {
+  const tabs = [...document.querySelectorAll('.prompt-tabs [role="tab"]')];
+  if (!tabs.length) return;
+  function activate(tab, focus = false) {
+    for (const t of tabs) {
+      const selected = t === tab;
+      t.setAttribute('aria-selected', String(selected));
+      t.tabIndex = selected ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !selected;
+    }
+    if (focus) tab.focus();
+  }
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => activate(tab));
+    tab.addEventListener('keydown', (e) => {
+      let next;
+      if (e.key === 'ArrowRight') next = (index + 1) % tabs.length;
+      else if (e.key === 'ArrowLeft') next = (index - 1 + tabs.length) % tabs.length;
+      else if (e.key === 'Home') next = 0;
+      else if (e.key === 'End') next = tabs.length - 1;
+      else return;
+      e.preventDefault();
+      activate(tabs[next], true);
+    });
+  });
+  for (const [displayId, copyId, content, label] of [
+    ['debug-prompt', 'copy-debug', debugTemplate, 'Copy debugging prompt'],
+    ['debug-example', 'copy-debug-example', debugExample, 'Copy example'],
+    ['extend-prompt', 'copy-extend', extendTemplate, 'Copy feature extension prompt']
+  ]) {
+    document.getElementById(displayId).textContent = content;
+    const button = document.getElementById(copyId);
+    button.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(content);
+        button.textContent = '✓ Copied!';
+        window.setTimeout(() => { button.textContent = label; }, 2000);
+      } catch {
+        const area = document.getElementById(displayId);
+        const selection = window.getSelection();
+        const range = document.createRange();
+        range.selectNodeContents(area);
+        selection.removeAllRanges();
+        selection.addRange(range);
+        button.textContent = 'Select text and copy';
+      }
+    });
+  }
+});
